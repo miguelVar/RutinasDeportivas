@@ -6,9 +6,13 @@
 package rutinasxml;
 
 import controlador.RutinasController;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Ejercicio;
 import modelo.Especialista;
 import modelo.GrupoDeportivo;
@@ -22,6 +26,7 @@ import modelo.TipoEjercicio;
  *
  * @author migue
  */
+
 public class RutinasMain {
 
     /**
@@ -30,6 +35,7 @@ public class RutinasMain {
     public static void main(String[] args) {
         // TODO code application logic here
 
+        Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         RutinasMain run = new RutinasMain();
 
         RutinasController rutinasController = new RutinasController();
@@ -41,14 +47,15 @@ public class RutinasMain {
                 + "3.Agregar ejercicio\n"
                 + "4.Buscar por id\n"
                 + "5.Eliminar por id\n"
-                + "6.Listar\n"
-                + "7.Salir\n"
+                + "6.Actualizar Especialista\n"
+                + "7.Listar\n"
+                + "8.Salir\n"
                 + "Ingrese una opcion:\n";
         do {
             System.out.println(menu);
             opcion = input.nextInt();
             run.gestion(opcion, run, rutinasController, input);
-        } while (opcion != 7);
+        } while (opcion != 8);
 
     }
 
@@ -97,6 +104,24 @@ public class RutinasMain {
                 } while (opcEliminar != 2);
                 break;
             case 6:
+                try {
+                    System.out.println("Ingrese el ID del especialista que desea actualizar");
+                    int idEsp = scanner.nextInt();
+                    Especialista especialista = controller.obtenerEspecilalista(idEsp);
+                    System.out.println("Antes: "+ especialista);
+                    especialista.setNombre("Miguel");
+                    especialista.setFechaNacimiento(main.parseFecha("1996-04-20"));
+                    controller.actualizarEspecilalista(especialista);
+                    System.out.println("Actualizado satisfactoriamente");
+                    especialista = controller.obtenerEspecilalista(idEsp);
+                    System.out.println("Despues: "+ especialista);
+
+                } catch (Exception e) {
+                    System.out.println("Hubo un error: "+ e.getMessage());
+                    System.out.println("El especialista no fue encontrado");
+                }
+                break;
+            case 7:
                 String menuListar = "Menu Listar\n"
                         + "1.Listar Ejercicios\n"
                         + "2.Listar Especialistas\n"
@@ -114,7 +139,7 @@ public class RutinasMain {
                     main.listar(opcListar, main, controller, scanner);
                 } while (opcListar != 8);
                 break;
-            case 7:
+            case 8:
                 System.exit(0);
                 break;
             default:
@@ -139,9 +164,9 @@ public class RutinasMain {
                 System.out.println("Ingrese el id del grupo deportivo");
                 idBuscar = scanner.nextInt();
                 GrupoDeportivo grupoDeportivo = controller.obtenerGrupoDeportivo(idBuscar);
-                if(grupoDeportivo != null){
+                if (grupoDeportivo != null) {
                     System.out.println(grupoDeportivo);
-                }else{
+                } else {
                     System.out.println("El grupo deportivo no fue encontrado");
                 }
                 break;
@@ -149,31 +174,31 @@ public class RutinasMain {
                 System.out.println("Ingrese el id de parte cuerpo");
                 idBuscar = scanner.nextInt();
                 ParteCuerpo parteCuerpo = controller.obtenerParteCuerpo(idBuscar);
-                if(parteCuerpo != null){
+                if (parteCuerpo != null) {
                     System.out.println(parteCuerpo);
-                }else{
+                } else {
                     System.out.println("Parte cuerpo no fue encontrado");
                 }
-                
+
                 break;
             case 4:
                 System.out.println("Ingrese el id del registro");
                 idBuscar = scanner.nextInt();
                 Registro registro = controller.obtenerRegistro(idBuscar);
-                if(registro != null){
+                if (registro != null) {
                     System.out.println(registro);
-                }else{
+                } else {
                     System.out.println("El registro no fue encontrado");
                 }
-                
+
                 break;
             case 5:
                 System.out.println("Ingrese el id del tipo de ejercicio");
                 idBuscar = scanner.nextInt();
                 TipoEjercicio tipoEjercicio = controller.obtenerTipoEjercicio((short) idBuscar);
-                if (tipoEjercicio != null){
+                if (tipoEjercicio != null) {
                     System.out.println(tipoEjercicio);
-                }else{
+                } else {
                     System.out.println("El tipo de ejercicio no fue encontrado");
                 }
                 break;
@@ -194,6 +219,7 @@ public class RutinasMain {
                     System.out.println("Registro de grupo deportivo eliminado satisfactoriamente");
                 } catch (Exception e) {
                     System.out.println("Hubo un error causado por: " + e.getMessage() + "\n");
+                    System.out.println("El grupo deportivo no fue encontrado");
                 }
 
                 break;
@@ -289,5 +315,16 @@ public class RutinasMain {
             salida.append(list1.toString() + "\n");
         }
         return salida.toString();
+    }
+
+    public Date parseFecha(String fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return fechaDate;
     }
 }
