@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/10/2020 11:26:52 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="rutinas" name="modelo.GrupoDeportivo" optimistic-lock="version" table="grupo_deportivo">
+    <id name="cscIntentos" type="int">
+      <column name="CSC_INTENTOS"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="modelo.Especialista" fetch="select" name="especialistaByEspIdEspecialista">
+      <column name="ESP_ID_ESPECIALISTA" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="modelo.Especialista" fetch="select" name="especialistaByIdEspecialista">
+      <column name="ID_ESPECIALISTA" not-null="true"/>
+    </many-to-one>
+    <property name="intento" type="int">
+      <column name="INTENTO" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

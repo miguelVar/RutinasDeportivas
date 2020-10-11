@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/migue/Documents/NetBeansProjects/RutinasXML/src/rutinasxml/RutinasXML.java</file>
+            <file>file:/C:/Users/migue/Documents/NetBeansProjects/RutinasXML/src/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/migue/Documents/NetBeansProjects/RutinasXML/src/modelo/hibernate.reveng.xml</file>
+            <file>file:/C:/Users/migue/Documents/NetBeansProjects/RutinasXML/src/modelo/Ejercicio.java</file>
+            <file>file:/C:/Users/migue/Documents/NetBeansProjects/RutinasXML/src/modelo/ParteCuerpo.java</file>
+            <file>file:/C:/Users/migue/Documents/NetBeansProjects/RutinasXML/src/dao/Dao.java</file>
+            <file>file:/C:/Users/migue/Documents/NetBeansProjects/RutinasXML/src/dao/impl/EjercicioDao.java</file>
+            <file>file:/C:/Users/migue/Documents/NetBeansProjects/RutinasXML/src/util/SessionManagment.java</file>
+        </group>
+    </open-files>
+</project-private>

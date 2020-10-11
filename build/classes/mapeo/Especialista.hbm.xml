@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/10/2020 11:26:52 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="rutinas" name="modelo.Especialista" optimistic-lock="version" table="especialista">
+    <id name="idEspecialista" type="int">
+      <column name="ID_ESPECIALISTA"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nombre" type="string">
+      <column length="50" name="NOMBRE" not-null="true"/>
+    </property>
+    <property name="fechaNacimiento" type="date">
+      <column length="10" name="FECHA_NACIMIENTO" not-null="true"/>
+    </property>
+    <property name="tarjetaProfesional" type="string">
+      <column length="12" name="TARJETA_PROFESIONAL" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="grupoDeportivosForEspIdEspecialista" table="grupo_deportivo" cascade="all">
+      <key>
+        <column name="ESP_ID_ESPECIALISTA" not-null="true"/>
+      </key>
+      <one-to-many class="modelo.GrupoDeportivo"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="rutinas" table="rutina" cascade="all">
+      <key>
+        <column name="ID_ESPECIALISTA" not-null="true"/>
+      </key>
+      <one-to-many class="modelo.Rutina"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="grupoDeportivosForIdEspecialista" table="grupo_deportivo" cascade="all">
+      <key>
+        <column name="ID_ESPECIALISTA" not-null="true"/>
+      </key>
+      <one-to-many class="modelo.GrupoDeportivo"/>
+    </set>
+    <one-to-one class="modelo.Registro" name="registro" cascade="all"/>
+  </class>
+</hibernate-mapping>
